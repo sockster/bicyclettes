@@ -167,6 +167,8 @@ model_pr = [WTough.price, WHigh.price, WSleek.price, WDay.price, WGust.price, WB
 """
 smallIndex = model_price.values().index(min(a.values()))
 smallKey = model_price.keys()[smallIndex]
+
+JUST CHECKING
 """
 
 
