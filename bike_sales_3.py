@@ -61,9 +61,9 @@ MODELS		  NAMES.Y		WEIGHT	MFR-COST	INV		CUST-NAME	CUST-BUDG
 
 
 
+markup = .20
 
-store = "Wheely Good"
-tax = .20
+
 		
 # using Classes by Bike Model:
 
@@ -73,7 +73,7 @@ class WTough(object):
 		self.style = "Road Bike"
 		self.weight = 26.00
 		self.cost = 700.00
-		self.price = (self.cost * tax) + (self.cost)
+		self.price = (self.cost * markup) + (self.cost)
 		self.inv = 15
 		
 class WHigh(object):
@@ -82,7 +82,7 @@ class WHigh(object):
 		self.style = "Mountain Bike"
 		self.weight = 30
 		self.cost = 900.00
-		self.price = (self.cost * tax) + (self.cost)
+		self.price = (self.cost * markup) + (self.cost)
 		self.inv = 12
 		
 class WSleek(object):
@@ -91,7 +91,7 @@ class WSleek(object):
 		self.style = "City Bike"
 		self.weight = 28
 		self.cost = 550.00
-		self.price = (self.cost * tax) + (self.cost)
+		self.price = (self.cost * markup) + (self.cost)
 		self.inv = 23
 		
 class WDay(object):
@@ -100,7 +100,7 @@ class WDay(object):
 		self.style = "Country Bike"
 		self.weight = 34
 		self.cost = 400.00
-		self.price = (self.cost * tax) + (self.cost)
+		self.price = (self.cost * markup) + (self.cost)
 		self.inv = 16
 		
 class WGust(object):
@@ -109,7 +109,7 @@ class WGust(object):
 		self.style = "Children's Bike"
 		self.weight = 24
 		self.cost = 150.00
-		self.price = (self.cost * tax) + (self.cost)
+		self.price = (self.cost * markup) + (self.cost)
 		self.inv = 5
 		
 class WBreeze(object):
@@ -118,7 +118,7 @@ class WBreeze(object):
 		self.style = "Fixed Gear Bike"
 		self.weight = 22
 		self.cost = 600.00
-		self.price = (self.cost * tax) + (self.cost)
+		self.price = (self.cost * markup) + (self.cost)
 		self.inv = 3
 
 
@@ -134,6 +134,8 @@ WGust = WGust()
 WBreeze = WBreeze()
 model_names = [WTough.model, WHigh.model, WSleek.model, WDay.model, WGust.model, WBreeze.model]
 
+
+store = "Wheely Good"
 
 def welcome():
 	print ""
@@ -155,44 +157,92 @@ def welcome():
 	print ""
 
 
-####     START HERE - DUMP INTO LIST (or dict?) SORT BY PRICE, BEGIN MODEL ELIMS BY BUDGET
-model_price = {"T": WTough.price, "H": WHigh.price, "S": WSleek.price, "D": WDay.price, "G": WGust.price, "B": WBreeze.price}
-model_pr = [WTough.price, WHigh.price, WSleek.price, WDay.price, WGust.price, WBreeze.price]
+# list of model costs (to produce) and
+# list of model prices (including 20% markup)
 model_cost = [WTough.cost, WHigh.cost, WSleek.cost, WDay.cost, WGust.cost, WBreeze.cost]
+model_price = [WTough.price, WHigh.price, WSleek.price, WDay.price, WGust.price, WBreeze.price]
 
+#  TESTING
 # print cost to produce each bike
+print "Original order of bike costs:\n",
 print model_cost
+print ""
 
+#  TESTING
 # print prices of bikes in original order
-print "Original order of bike prices:\n",
-print model_pr
+print "Original order of bike prices (including markup: cost + 20%):\n",
+print model_price
+print ""
 
+#  TESTING
 # sort prices of bikes in model_pr
-model_pr.sort()
+print "Sorted order of bike prices (including markup):\n",
+price_ascend = sorted(model_price)
+print price_ascend
+
+#  TESTING
+num_bikes = len(price_ascend)
+# length of sorted price list
+half_prlist = num_bikes / 2
+
+
+#  TESTING
+# half the length of sorted price list
+print "half_prlist is:\n"
+print half_prlist
+
+#  TESTING
+# maximum price in 1st half of sorted price list
+halfway_prlist = max(price_ascend[0:half_prlist])
+print halfway_prlist
+
+
+#  INFO
 #   FOR INFO ON SORTING LIST OF CLASS OBJECTS:
 #  https://www.daniweb.com/software-development/python/code/216631/a-list-of-class-objects-python
 
 
 """
-
-def budget():
-
+# if cust_budget is greater than most expensive bike:
+def budget_big():
 	print ""
 	print ""
-	print "So, what kind of budget do you have in mind?"
+	print "So, how much did you want to spend?"
 	print ""
-	c_budget = raw_input()
-		if c_budget >= 900:
-			print "Well, we have every style to fit your budget!"
-			wants()
-		elif c_budget < 900:
-			print "Sure! We have several styles to fit your budget"
-			print 
+	cust_budget = raw_input()
+	if cust_budget >= max(price_ascend):
+		print "Well, we have every style to fit your budget!"
+		wants()
+	else:
+		def budget_qs()
+		
+
+# if cust_budget is between cost of top bike and next lower-priced bike:
+#     --->  change to last-called bike price
+x = 1
+def budget_qs():
+	while number_of_bikes >= 0:
+		if cust_budget >= price_ascend[number_of_bikes - x] and <= price_ascend[number_of_bikes]:
+			print "Yes, we have several models you can check out!"
+			print "We have the ",
+			print model_names[0:number_of_bikes - x]
+			
+			
+			elif cust_budget >= price_ascend[0] and <= price_ascend[num_bikes]:
+		print "Sure! We have several styles to fit your budget"
+		print 
+
+"""
+
+#  num_bikes = inventory; number_of_bikes is a count var
+number_of_bikes = num_bikes
 
 
+#  TESTING
+print "bike models except for top-priced model"
+print model_names[0:number_of_bikes - 1]
 
-
-
+"""
 
 
 #		Ask what type of bike - to figure out model
@@ -242,5 +292,5 @@ wants()
 
 #
 
-
 """
+
