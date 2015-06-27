@@ -239,6 +239,10 @@ number_of_bikes = num_bikes
 
 
 #  TESTING
+print "all bike model names sorted by price"
+print sorted(model_names)
+print ""
+
 print "bike models except for top-priced model"
 print model_names[0:number_of_bikes - 1]
 
