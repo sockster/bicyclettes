@@ -188,13 +188,32 @@ half_prlist = num_bikes / 2
 
 #  TESTING
 # half the length of sorted price list
-print "half_prlist is:\n"
+print "\nHalf_prlist is:"
 print half_prlist
 
 #  TESTING
 # maximum price in 1st half of sorted price list
-halfway_prlist = max(price_ascend[0:half_prlist])
-print halfway_prlist
+median_prlist = max(price_ascend[0:half_prlist])
+print "\nMedian price"
+print median_prlist
+
+
+#  TESTING
+# price between median price up to not incl max price
+print "\nPrices from median up to not incl highest price"
+print price_ascend[half_prlist:(num_bikes - 1)]
+
+#  num_bikes = inventory; number_of_bikes is a count var
+number_of_bikes = num_bikes
+
+
+#  TESTING
+print "\nAll bike model names sorted by price"
+print sorted(model_names)
+
+print "\nBike models except for top-priced model"
+print model_names[0:number_of_bikes - 1]
+
 
 
 #  INFO
@@ -202,51 +221,48 @@ print halfway_prlist
 #  https://www.daniweb.com/software-development/python/code/216631/a-list-of-class-objects-python
 
 
-"""
+
+
+
+
+cust_budget = raw_input("So, how much did you want to spend?\n")
+
+
+
+
+
+
+
 # if cust_budget is greater than most expensive bike:
 def budget_big():
-	print ""
-	print ""
-	print "So, how much did you want to spend?"
-	print ""
-	cust_budget = raw_input()
-	if cust_budget >= max(price_ascend):
+	print cust_budget
+	if int(cust_budget) >= int(max(price_ascend)):
 		print "Well, we have every style to fit your budget!"
-		wants()
+		print "\n your budget is %s" % cust_budget
+		print "\n our top-priced bike is %s" % max(price_ascend)
+#		wants()
 	else:
-		def budget_qs()
+		budget_queries()
 		
-
+		
 # if cust_budget is between cost of top bike and next lower-priced bike:
 #     --->  change to last-called bike price
-x = 1
-def budget_qs():
-	while number_of_bikes >= 0:
-		if cust_budget >= price_ascend[number_of_bikes - x] and <= price_ascend[number_of_bikes]:
+def budget_queries():
+	x = 1
+	number_of_bikes = num_bikes
+	print number_of_bikes
+	print price_ascend
+	print price_ascend[int(number_of_bikes)]
+	
+	"""
+	while x <= number_of_bikes:
+		if cust_budget >= price_ascend[(number_of_bikes - x)] and cust_budget < price_ascend[number_of_bikes]:
 			print "Yes, we have several models you can check out!"
-			print "We have the ",
-			print model_names[0:number_of_bikes - x]
-			
-			
-			elif cust_budget >= price_ascend[0] and <= price_ascend[num_bikes]:
-		print "Sure! We have several styles to fit your budget"
-		print 
-
-"""
-
-#  num_bikes = inventory; number_of_bikes is a count var
-number_of_bikes = num_bikes
-
-
-#  TESTING
-print "all bike model names sorted by price"
-print sorted(model_names)
-print ""
-
-print "bike models except for top-priced model"
-print model_names[0:number_of_bikes - 1]
-
-"""
+			x += 1
+		else:
+			print "We have a top-notch children's model"
+ 
+	"""
 
 
 #		Ask what type of bike - to figure out model
@@ -277,14 +293,17 @@ def wants():
 			print "Oh. Well you probably want something else."
 			mod_num += 1
 	
+
+
+
+
+
 	
+
 #    Commenting out for testing
 welcome()
-
-
-wants()
+budget_big()
 
 
 
-"""
 
