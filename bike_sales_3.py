@@ -173,9 +173,9 @@ print ""
 
 
 
-#  ===== >  how to get class (bike) name from sorted by price list (model_price)
+#  ===== >  how to get class (bike) name from sorted by price list (model_price): DICTIONARY
 
-#  TESTING
+#  TESTING: interesting but not working (for another time)
 # sort prices of bikes in model_pr
 print "Sorted order of bike prices (including markup):\n",
 model_price.sort()
@@ -189,8 +189,49 @@ print ""
 print ""
 print ""
 
+#   NOT RETAINING SORT ORDER
 print "\nprice_ascend names - s/b sorted by price, not name"
 print price_ascend
+
+
+
+
+
+
+
+
+name_price = {
+	WTough.model: WTough.price,
+	WHigh.model: WHigh.price,
+	WSleek.model: WSleek.price,
+	WDay.model: WDay.price,
+	WGust.model: WGust.price,
+	WBreeze.model: WBreeze.price
+}
+
+print "Dictionary of models"
+print name_price.keys()
+
+print "\nDictionary of prices"
+print name_price.values()
+
+namePrice = name_price.values()
+namePrice.sort()
+for value in namePrice:
+	print "%s: %s" % (value, name_price[value])
+#	INFO
+#  http://www.saltycrane.com/blog/2007/09/how-to-sort-python-dictionary-by-keys/
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -237,7 +278,8 @@ print model_names[0:number_of_bikes - 1]
 #  INFO
 #   FOR INFO ON SORTING LIST OF CLASS OBJECTS:
 #  https://www.daniweb.com/software-development/python/code/216631/a-list-of-class-objects-python
-
+#	CLEAR EXAMPLE ON ENUM TYPES:
+#  http://www.saltycrane.com/blog/2012/10/python-enum-types/
 
 
 
