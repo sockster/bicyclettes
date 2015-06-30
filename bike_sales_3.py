@@ -1,31 +1,32 @@
 """
-I've put each bike model as its own class, with the properties for each bike contained inside that class. 
+SETUP
+- each bike model is its own class
+- properties for each bike contained inside that class 
+- print each model name
+	[could've dumped model names into a list and just printed that out]
+- create list of bike model names
 
-I then print each model name, which I did manually, although now I think I could've dumped the 
-model names into a list and just printed that out.
+BUDGET
+- get customer's budget
+- sort price of bikes (ascending)
+- compare customer's budget to each bike price (descending)
+- 
 
-> > Next, I want to dump the bike types into a dictionary (bike name=key : bike type=value) 
-    [name_a:type_a, name_b:type_b, name_c:type_c]
+[LATER - if customer's budget > highest price bike, ask type of bike wanted ("def wants" written)]
 
-and, using a while statement, ask the customer if s/he is looking for (each) type of bike in the dictionary. 
-    answer = "n" or "N"
-    while answer is True:
-    "Are you looking for [type_a]?"
-    "y or n"
-    answer = raw_input()
-when answer = False, return the key (name_x) to the bike type (type_x) from the dictionary
-.
-.
-.
-- From there,  capture all of the customer's information
-- Then talk budget, using if statements to get a bike within the customer's budget (comparing budget 
-  against bike cost + 20% markup)
-- Next, print out the customer's information, type of bike purchased, cost of bike, and how much 
-  they saved (money left over from their budget)
-- Finally, print out the remaining inventory in the store, including -1 of the model the customer bought
+CUSTOMER
+- get customer's FIRST, LAST, ADDRESS (St, City, ST, Zip)
+- budget
+- list of models customer can afford
+- bike selection
+- remaining $$ from their budget
 
-From there, it should be fairly straightforward to grab the classes and throw them into their own file, 
-importing that file to start things rolling.
+INVENTORY
+- number of bikes before customer purchase
+- numbr of each model after customer purchase
+
+
+
 
 = = = = = = = = = = = = = = = = = = = = = = = = = = =
 - what is the outcome expected
@@ -50,12 +51,12 @@ importing that file to start things rolling.
 
 
 MODELS		  NAMES.Y		WEIGHT	MFR-COST	INV		CUST-NAME	CUST-BUDG
-- road		  windy-tough	26 lb	$700		15		? (raw_input)	? (raw_input)
 - mountain    windy-high	30 lb	$900		12		?				?
+- road		  windy-tough	26 lb	$700		15		? (raw_input)	? (raw_input)
+- fixed gear  windy-breeze	22 lb	$600		3		?				?
 - city		  windy-sleek	28 lb	$550		23		?				?
 - country	  windy-day		34 lb	$400		16		?				?
 - kids'		  windy-gust	24 lb	$150		5		?				?
-- fixed gear  windy-breeze	22 lb	$600		3		?				?
 
 """
 
@@ -147,12 +148,7 @@ def welcome():
 	print ""
 	print "Our models are:"
 	print "the",
-	print WTough.model + ", the",
-	print WHigh.model + ", the",
-	print WSleek.model + ", the",
-	print WDay.model + ", the",
-	print WGust.model + ", and the",
-	print WBreeze.model 
+	print model_names
 	print ""
 	print ""
 
@@ -174,38 +170,60 @@ print "Original order of bike prices (including markup: cost + 20%):\n",
 print model_price
 print ""
 
+
+
+
+#  ===== >  how to get class (bike) name from sorted by price list (model_price)
+
 #  TESTING
 # sort prices of bikes in model_pr
 print "Sorted order of bike prices (including markup):\n",
-price_ascend = sorted(model_price)
+model_price.sort()
+import itertools
+name_ascend = model_price.__class__.__name__
+print name_ascend
+print ""
+print ""
+price_ascend = model_price
+print ""
+print ""
+print ""
+
+print "\nprice_ascend names - s/b sorted by price, not name"
 print price_ascend
 
+
+
 #  TESTING
-num_bikes = len(price_ascend)
-# length of sorted price list
-half_prlist = num_bikes / 2
+num_bikes = len(model_price)
+# length of price list
+print "\nNumber of bike models:"
+print num_bikes
 
 
 #  TESTING
 # half the length of sorted price list
+half_prlist = num_bikes / 2
 print "\nHalf_prlist is:"
 print half_prlist
 
+"""
 #  TESTING
 # maximum price in 1st half of sorted price list
 median_prlist = max(price_ascend[0:half_prlist])
 print "\nMedian price"
 print median_prlist
+"""
 
+
+#  TESTING
+#  num_bikes = inventory; number_of_bikes is a count var
+number_of_bikes = num_bikes
 
 #  TESTING
 # price between median price up to not incl max price
 print "\nPrices from median up to not incl highest price"
 print price_ascend[half_prlist:(num_bikes - 1)]
-
-#  num_bikes = inventory; number_of_bikes is a count var
-number_of_bikes = num_bikes
-
 
 #  TESTING
 print "\nAll bike model names sorted by price"
@@ -236,35 +254,46 @@ cust_budget = raw_input("So, how much did you want to spend?\n")
 # if cust_budget is greater than most expensive bike:
 def budget_big():
 	print cust_budget
-	if int(cust_budget) >= int(max(price_ascend)):
+	if cust_budget >= max(price_ascend):
 		print "Well, we have every style to fit your budget!"
 		print "\n your budget is %s" % cust_budget
 		print "\n our top-priced bike is %s" % max(price_ascend)
 #		wants()
 	else:
-		budget_queries()
+#		budget_queries()
+		print "Not big budget"
+	
 		
-		
+
+
+number_of_bikes = 6
+# num_bikes
+print number_of_bikes
+print price_ascend
+print price_ascend[:(number_of_bikes - 1)]
+countdown = price_ascend[:(number_of_bikes - 1)]
+
+"""
+==== > Right now stuck in endless loop of "else" statement
+
 # if cust_budget is between cost of top bike and next lower-priced bike:
 #     --->  change to last-called bike price
 def budget_queries():
-	x = 1
-	number_of_bikes = num_bikes
-	print number_of_bikes
-	print price_ascend
-	print price_ascend[int(number_of_bikes)]
+	number_of_bikes = 6
+	while number_of_bikes > 0:
+		high_cost = max(price_ascend[:number_of_bikes])
+		low_cost = max(price_ascend[:(number_of_bikes - 1)])
 	
-	"""
-	while x <= number_of_bikes:
-		if cust_budget >= price_ascend[(number_of_bikes - x)] and cust_budget < price_ascend[number_of_bikes]:
+	
+		if cust_budget >= low_cost and cust_budget < high_cost:
 			print "Yes, we have several models you can check out!"
-			x += 1
+			number_of_bikes -= number_of_bikes
 		else:
 			print "We have a top-notch children's model"
  
-	"""
+"""
 
-
+"""
 #		Ask what type of bike - to figure out model
 
 def wants():
@@ -302,8 +331,10 @@ def wants():
 
 #    Commenting out for testing
 welcome()
-budget_big()
+# budget_big()
 
 
 
 
+budget_queries()
+"""
