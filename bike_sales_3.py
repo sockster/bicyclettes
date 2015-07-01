@@ -158,6 +158,8 @@ def welcome():
 model_cost = [WTough.cost, WHigh.cost, WSleek.cost, WDay.cost, WGust.cost, WBreeze.cost]
 model_price = [WTough.price, WHigh.price, WSleek.price, WDay.price, WGust.price, WBreeze.price]
 
+
+"""
 #  TESTING
 # print cost to produce each bike
 print "Original order of bike costs:\n",
@@ -171,14 +173,87 @@ print model_price
 print ""
 
 
+print "Print model_price[3]"
+print model_price[3]
+models_by_name = sorted(model_price)
+print "Print model_price SORTED by price"
+print models_by_name
+list(models_by_name)
+print ""
+print ""
+"""
 
 
+
+
+# dictionary of name/price to: SORT by price, then return corresponding models
+
+name_price = {
+	WTough.model: WTough.price,
+	WHigh.model: WHigh.price,
+	WSleek.model: WSleek.price,
+	WDay.model: WDay.price,
+	WGust.model: WGust.price,
+	WBreeze.model: WBreeze.price
+}
+
+
+#  INFO ON SORTING DICIONARY
+#   http://www.pythoncentral.io/how-to-sort-python-dictionaries-by-key-or-value/
+
+
+print "list of name_price dictionary:"
+print list(name_price)
+print ""
+print "sorted(name_price) ... defaults to sorting by key: same as sorted(name_price.keys())"
+print sorted(name_price)
+print ""
+print ""
+print "sorted(name_price.values())"
+print sorted(name_price.values())
+print ""
+print ""
+print "Is the last sort retained? I'll just call name_price"
+print name_price
+print ""
+print ""
+print "what happens if I store in a var? will order be stored?!"
+SName_price = sorted(name_price.values())
+print list(SName_price)
+print SName_price
+print ""
+print ""
+
+
+
+
+
+"""
+for value in model_price:
+	print "%s.%s" % (model_price)
+"""
 #  ===== >  how to get class (bike) name from sorted by price list (model_price): DICTIONARY
 
+
+"""
+#   > > > > > > > > > > > > > > > > > > > c/b deleted  (below)
+
+
+#   NOT RETAINING SORT ORDER
+print "sorted by values?  No"
+sorted(name_price.values())
+print "sorted by names?  No"
+print name_price.keys()
+
+
+
+#   NOT RETAINING SORT ORDER
 #  TESTING: interesting but not working (for another time)
 # sort prices of bikes in model_pr
 print "Sorted order of bike prices (including markup):\n",
 model_price.sort()
+
+#   NOT RETAINING SORT ORDER
 import itertools
 name_ascend = model_price.__class__.__name__
 print name_ascend
@@ -192,36 +267,31 @@ print ""
 #   NOT RETAINING SORT ORDER
 print "\nprice_ascend names - s/b sorted by price, not name"
 print price_ascend
+print ""
+print ""
+
+#   > > > > > > > > > > > > > > > > > > > c/b deleted  (above)
+"""
 
 
-
-
-
-
-
-
-name_price = {
-	WTough.model: WTough.price,
-	WHigh.model: WHigh.price,
-	WSleek.model: WSleek.price,
-	WDay.model: WDay.price,
-	WGust.model: WGust.price,
-	WBreeze.model: WBreeze.price
-}
-
-print "Dictionary of models"
+	
+	
+	
+	
+"""
+	
+print "Dictionary of models - keys"
 print name_price.keys()
 
-print "\nDictionary of prices"
+print "\nDictionary of prices - values"
 print name_price.values()
 
-namePrice = name_price.values()
+namePrice = sorted(name_price.values())
 namePrice.sort()
 for value in namePrice:
 	print "%s: %s" % (value, name_price[value])
 #	INFO
 #  http://www.saltycrane.com/blog/2007/09/how-to-sort-python-dictionary-by-keys/
-
 
 
 
@@ -248,13 +318,12 @@ half_prlist = num_bikes / 2
 print "\nHalf_prlist is:"
 print half_prlist
 
-"""
+
 #  TESTING
 # maximum price in 1st half of sorted price list
 median_prlist = max(price_ascend[0:half_prlist])
 print "\nMedian price"
 print median_prlist
-"""
 
 
 #  TESTING
@@ -315,7 +384,7 @@ print price_ascend
 print price_ascend[:(number_of_bikes - 1)]
 countdown = price_ascend[:(number_of_bikes - 1)]
 
-"""
+
 ==== > Right now stuck in endless loop of "else" statement
 
 # if cust_budget is between cost of top bike and next lower-priced bike:
@@ -333,9 +402,8 @@ def budget_queries():
 		else:
 			print "We have a top-notch children's model"
  
-"""
 
-"""
+ ======== >			SAVE for completed price query def
 #		Ask what type of bike - to figure out model
 
 def wants():
@@ -380,3 +448,5 @@ welcome()
 
 budget_queries()
 """
+
+
