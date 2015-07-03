@@ -23,7 +23,23 @@ CUSTOMER
 
 INVENTORY
 - number of bikes before customer purchase
-- numbr of each model after customer purchase
+- number of each model after customer purchase
+= = = = = = = = = = = = = = = = = = = = = = = = = = =
+
+- create classes for each model bike with *.properties
+	^ sort classes by price of model
+		* Fail
+	^ throw each model.price into a list and sort by .price
+		* Fail - new list doesn't retain new sort order   				Q:   WHY NOT?
+	^ throw each model: price into a dictionary and sort by price
+		* 
+
+
+
+
+
+
+
 
 
 
@@ -134,6 +150,100 @@ WDay = WDay()
 WGust = WGust()
 WBreeze = WBreeze()
 model_names = [WTough.model, WHigh.model, WSleek.model, WDay.model, WGust.model, WBreeze.model]
+model_price = [WTough.price, WHigh.price, WSleek.price, WDay.price, WGust.price, WBreeze.price]
+model_price_COPY = model_price
+
+# dictionary of model-to-price
+model_nPrice = {
+	WTough.model: WTough.price,
+	WHigh.model: WHigh.price,
+	WSleek.model: WSleek.price,
+	WDay.model: WDay.price,
+	WGust.model: WGust.price,
+	WBreeze.model: WBreeze.price
+}
+
+
+modelPrice = list()
+modelPrice.append(model_nPrice("WTough", "700.00"))
+modelPrice.append(model_nPrice("WHigh", "900.00"))
+modelPrice.append(model_nPrice("WSleek", "550.00"))
+modelPrice.append(model_nPrice("WDay", "400.00"))
+modelPrice.append(model_nPrice("WGust", "150.00"))
+modelPrice.append(model_nPrice("WBreeze", "600.00"))
+
+
+
+
+
+# THE PLAN:
+#	sort class following: http://www.programmingforums.org/thread26556.html
+# FAIL.    ...AGAIN
+
+
+sort_list = []
+for class_object in modelPrice:
+	print class_object.model + ": $" + class_object.price
+	sort_list.append( [class_object.price, class_object.model, class_object])
+	
+sort_list.sort()
+print "\nAfter sort: \n"
+for rec in sort_list:
+	class_object = rec[2]
+	print class_object.model + ": $" + class_object.price
+	
+"""
+
+
+
+Attempts at sorting dictionaries - FAIL
+testing = {
+	"one": "one-1",
+	"four": "four-4",
+	"three": "three-3",
+	"two": "two-2"
+}
+
+values = testing.values()
+STesting = sorted(values)
+keys = testing.keys()
+sKeys = keys[STesting]
+
+print "These are the keys to the sorted values:"
+print sKeys
+
+
+
+
+print "This is the dictionary as written:"
+print testing
+print "\nThis is the dictionary sorted() - which sorts by keys (presum. by default):"
+print sorted(testing)
+print "\nThis is the dictionary sorted(testing.value):"
+print sorted(testing.values())
+
+
+
+
+
+
+
+
+
+print "This is model_nPrice mod"
+print model_nPrice
+print "\nThese are the model_nPrice keys"
+print model_nPrice.keys()
+print "\nThese are the model_nPrice values"
+print model_nPrice.values()
+
+sorted(model_nPrice.values())
+print "This is sorted model_nPrice mod"
+print model_nPrice
+
+
+
+
 
 
 store = "Wheely Good"
@@ -159,7 +269,6 @@ model_cost = [WTough.cost, WHigh.cost, WSleek.cost, WDay.cost, WGust.cost, WBree
 model_price = [WTough.price, WHigh.price, WSleek.price, WDay.price, WGust.price, WBreeze.price]
 
 
-"""
 #  TESTING
 # print cost to produce each bike
 print "Original order of bike costs:\n",
@@ -181,7 +290,6 @@ print models_by_name
 list(models_by_name)
 print ""
 print ""
-"""
 
 
 
@@ -228,14 +336,11 @@ print ""
 
 
 
-"""
 for value in model_price:
 	print "%s.%s" % (model_price)
-"""
 #  ===== >  how to get class (bike) name from sorted by price list (model_price): DICTIONARY
 
 
-"""
 #   > > > > > > > > > > > > > > > > > > > c/b deleted  (below)
 
 
@@ -271,14 +376,12 @@ print ""
 print ""
 
 #   > > > > > > > > > > > > > > > > > > > c/b deleted  (above)
-"""
 
 
 	
 	
 	
 	
-"""
 	
 print "Dictionary of models - keys"
 print name_price.keys()
@@ -450,3 +553,4 @@ budget_queries()
 """
 
 
+print "Hello"
