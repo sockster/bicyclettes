@@ -30,7 +30,7 @@ INVENTORY
 	^ sort classes by price of model
 		* Fail
 	^ throw each model.price into a list and sort by .price
-		* Fail - new list doesn't retain new sort order   				Q:   WHY NOT?
+		* Fail - new list doesn't retain new sort order   							Q:   WHY NOT?
 	^ throw each model: price into a dictionary and sort by price
 		* 
 
@@ -142,7 +142,7 @@ class WBreeze(object):
 
 
 
-
+#  																		ALIASES:
 WTough = WTough()
 WHigh = WHigh()
 WSleek = WSleek()
@@ -151,6 +151,219 @@ WGust = WGust()
 WBreeze = WBreeze()
 model_names = [WTough.model, WHigh.model, WSleek.model, WDay.model, WGust.model, WBreeze.model]
 model_price = [WTough.price, WHigh.price, WSleek.price, WDay.price, WGust.price, WBreeze.price]
+
+
+# list of model costs (to produce) and
+# list of model prices (including 20% markup)
+model_cost = [WTough.cost, WHigh.cost, WSleek.cost, WDay.cost, WGust.cost, WBreeze.cost]
+model_price = [WTough.price, WHigh.price, WSleek.price, WDay.price, WGust.price, WBreeze.price]
+
+
+
+
+
+# THE PLAN - 07.03:
+#	sort by price; leave names for now
+
+
+
+
+#  TESTING
+# number of bike models
+num_bikes = len(model_price)
+bikes_budget = num_bikes
+# length of price list
+print "\nNumber of bike models:"
+print num_bikes
+
+# sorted list of bike prices
+sModelprice = sorted(model_price)
+print "Sorted Model Prices"
+print sModelprice
+
+
+cust_budget = raw_input("So, how much did you want to spend?\n")
+cust_budget = float(cust_budget)
+
+
+
+
+
+
+"""
+#  begins budget queries
+def spend_budget():
+	budget_big()
+"""
+
+
+
+
+#  calls 1st budget query (>= top price or < min)
+
+# if cust_budget is >= most expensive bike...	 if not, call 2nd budget query
+def budget_big():
+	if cust_budget >= max(sModelprice):
+		print "Well, we have every style to fit your budget!"
+#		print "\n your budget is %s" % cust_budget
+#		print "\n our top-priced bike is %s" % max(sModelprice)
+#		wants()
+
+# 2nd budget query: if cust_budget < lowest price
+	elif cust_budget < min(sModelprice):
+		print "I'm sorry, we don't have any bike models in your price range,",
+		print " but we have plenty of accessories you might be interested in."
+		
+	else:
+		budget_mid()
+		print "> > To mid-level priced bikes"
+		
+def budget_mid():
+	x = len(sModelprice)
+
+	while cust_budget > sModelprice[x]:
+		if cust_budget >= sModelprice[x]:
+			budget_found()
+		
+		else:
+			print "Well, we have others"
+		x -= 1
+			
+	
+
+
+#   TESTING
+#	Trying to call each specific element in sModelprice list to compare to cust_budget
+#   Below would use var from len of sModelprice to call specific element in list
+print "TESTING"
+print "sModelprice[0] :"
+print sModelprice[0]
+print "len(sModelprice) :"
+print len(sModelprice)
+
+x = len(sModelprice)
+print "print x (s/b same as above):"
+print x
+print "print x = x - 2"
+x = x - 2
+print x
+print "print sModelprice[x]:"
+print sModelprice[x]
+print ""
+print ""
+print "END OF TESTING"
+
+#	END TESTING
+
+
+
+
+def budget_found():
+	print "Ok - we have several styles to fit your budget."
+#	print "\n your budget is %s" % cust_budget
+#	print "\n our top-priced bike for you is %s" % sModelprice[x]
+
+
+
+
+
+
+"""																		error returned is:
+
+sModelprice[x]
+Traceback (most recent call last):
+  File "bike_sales_3.py", line 253, in <module>
+    print sModelprice[x]
+IndexError: list index out of range
+
+																		WHY?
+																		if sModelprice[0] returns 1st element in sModelprice,
+																			and x = len(sModelprice),
+																			returning 6,
+																			why doesn't sModelprice[x] work?
+																			TRIED: x = int(x), but returned same error
+"""		
+
+
+budget_big()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+"""		> > >			Below are previous attempts at sorting price, retaining the sort, then returning bike names
+
+# IMMEDIATELY BELOW: trying to look at each highest price and compare to cust_budget by calling 1 less than len of prices
+#		each "round"
+
+# Count in sModelprice
+x = (len(sModelprice) - 1)
+def budget_mid():
+	print sModelprice
+	print ""
+#	x = 6
+	y = (sModelprice[x])
+	print "X:",
+	print x
+	print "Y:",
+	print y
+	
+	hi_price = x - 1
+	low_price = x
+#	for (sModelprice):
+	low_price = int(min(sModelprice))
+#	for i in range(hi_price, low_price, -1):
+#		print i
+
+
+
+
+
+
+# this print entire range ... could use as "if w/in range..."
+# mid-range price queries, w/ "x" = negative count
+def budget_mid():
+	x = 1
+#	while cust_budget <= sModelprice[:: -x]:
+#			if cust_budget is less than top price and greater than next highest price
+	Int_sModelprice_min = int(min(sModelprice))
+	Int_sModelprice_max = int(max(sModelprice))
+	print Int_sModelprice_min
+	print Int_sModelprice_max
+	for budget_guess in range(Int_sModelprice_min, Int_sModelprice_max):
+		print range(budget_guess)
+
+
+
+
+
+
+
+#   @@@@@@@@
+
+
+# spend_budget()
+budget_mid()
+
+
+
+
+
+
+# THE PLAN - 07.02:
+#	sort class following: http://www.programmingforums.org/thread26556.html
+# FAIL.    ...AGAIN
+
 model_price_COPY = model_price
 
 # dictionary of model-to-price
@@ -175,12 +388,6 @@ modelPrice.append(model_nPrice("WBreeze", "600.00"))
 
 
 
-
-# THE PLAN:
-#	sort class following: http://www.programmingforums.org/thread26556.html
-# FAIL.    ...AGAIN
-
-
 sort_list = []
 for class_object in modelPrice:
 	print class_object.model + ": $" + class_object.price
@@ -192,11 +399,9 @@ for rec in sort_list:
 	class_object = rec[2]
 	print class_object.model + ": $" + class_object.price
 	
-"""
 
 
-
-Attempts at sorting dictionaries - FAIL
+#	Attempts at sorting dictionaries - FAIL
 testing = {
 	"one": "one-1",
 	"four": "four-4",
@@ -224,12 +429,6 @@ print sorted(testing.values())
 
 
 
-
-
-
-
-
-
 print "This is model_nPrice mod"
 print model_nPrice
 print "\nThese are the model_nPrice keys"
@@ -240,7 +439,6 @@ print model_nPrice.values()
 sorted(model_nPrice.values())
 print "This is sorted model_nPrice mod"
 print model_nPrice
-
 
 
 
@@ -261,12 +459,6 @@ def welcome():
 	print model_names
 	print ""
 	print ""
-
-
-# list of model costs (to produce) and
-# list of model prices (including 20% markup)
-model_cost = [WTough.cost, WHigh.cost, WSleek.cost, WDay.cost, WGust.cost, WBreeze.cost]
-model_price = [WTough.price, WHigh.price, WSleek.price, WDay.price, WGust.price, WBreeze.price]
 
 
 #  TESTING
@@ -407,14 +599,6 @@ for value in namePrice:
 
 
 
-
-#  TESTING
-num_bikes = len(model_price)
-# length of price list
-print "\nNumber of bike models:"
-print num_bikes
-
-
 #  TESTING
 # half the length of sorted price list
 half_prlist = num_bikes / 2
@@ -457,26 +641,6 @@ print model_names[0:number_of_bikes - 1]
 
 
 
-cust_budget = raw_input("So, how much did you want to spend?\n")
-
-
-
-
-
-
-
-# if cust_budget is greater than most expensive bike:
-def budget_big():
-	print cust_budget
-	if cust_budget >= max(price_ascend):
-		print "Well, we have every style to fit your budget!"
-		print "\n your budget is %s" % cust_budget
-		print "\n our top-priced bike is %s" % max(price_ascend)
-#		wants()
-	else:
-#		budget_queries()
-		print "Not big budget"
-	
 		
 
 
