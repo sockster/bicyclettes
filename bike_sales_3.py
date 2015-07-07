@@ -76,10 +76,10 @@ MODELS		  NAMES.Y		WEIGHT	MFR-COST	INV		CUST-NAME	CUST-BUDG
 
 """
 
-
+# 		= = = = = = = = = = = = = = = = = = = = = = = = = = =		SECTION 01
+# 		= = = = = = = = = = = = = = = = = = = = = = = = = = =			setting classes; storing price markup 
 
 markup = .20
-
 
 		
 # using Classes by Bike Model:
@@ -141,25 +141,182 @@ class WBreeze(object):
 
 
 
+# 		= = = = = = = = = = = = = = = = = = = = = = = = = = =		SECTION 02
+# 		= = = = = = = = = = = = = = = = = = = = = = = = = = =			aliases; 
+# 		= = = = = = = = = = = = = = = = = = = = = = = = = = =			list of model names; list of model cost; list of model prices
 
-#  																		ALIASES:
+
+
 WTough = WTough()
 WHigh = WHigh()
 WSleek = WSleek()
 WDay = WDay()
 WGust = WGust()
 WBreeze = WBreeze()
-model_names = [WTough.model, WHigh.model, WSleek.model, WDay.model, WGust.model, WBreeze.model]
-model_price = [WTough.price, WHigh.price, WSleek.price, WDay.price, WGust.price, WBreeze.price]
-
 
 # list of model costs (to produce) and
 # list of model prices (including 20% markup)
+model_names = [WTough.model, WHigh.model, WSleek.model, WDay.model, WGust.model, WBreeze.model]
 model_cost = [WTough.cost, WHigh.cost, WSleek.cost, WDay.cost, WGust.cost, WBreeze.cost]
 model_price = [WTough.price, WHigh.price, WSleek.price, WDay.price, WGust.price, WBreeze.price]
 
 
 
+
+
+
+# 		= = = = = = = = = = = = = = = = = = = = = = = = = = =		SECTION 03
+# 		= = = = = = = = = = = = = = = = = = = = = = = = = = =			the big sort - by price, retain sort, return model names 
+
+
+
+# dictionary of name/price to: SORT by price, then return corresponding models
+
+
+import operator
+name_price = {
+	WTough.model: WTough.price,
+	WHigh.model: WHigh.price,
+	WSleek.model: WSleek.price,
+	WDay.model: WDay.price,
+	WGust.model: WGust.price,
+	WBreeze.model: WBreeze.price
+}
+sorted_name_price = sorted(name_price.items(), key = operator.itemgetter(1))
+
+
+print "sorted_name_price"
+print sorted_name_price
+print "print first item in sorted list"
+print sorted_name_price
+
+
+print len(sorted_name_price)
+
+print name_price
+
+for i in name_price(value):
+	print i
+	
+#	for i in range(low_price, hi_price,  -1):
+#		print i
+
+
+
+
+
+"""
+
+#  calls 1st budget query (>= top price or < min)
+
+# if cust_budget is >= most expensive bike...	 if not, call 2nd budget query
+def budget_big():
+	if cust_budget >= max(model_price):
+		print "Well, we have every style to fit your budget!"
+		print "\n your budget is %s" % cust_budget
+		print "\n our top-priced bike is %s" % max(model_price)
+#		wants()
+
+# 2nd budget query: if cust_budget < lowest price
+	elif cust_budget < min(model_price):
+		print "I'm sorry, we don't have any bike models in your price range,",
+		print " but we have plenty of accessories you might be interested in."
+		
+	else:
+		budget_mid()
+		print "> > To mid-level priced bikes"
+		
+def budget_mid():
+	x = len(sModelprice)
+
+	while cust_budget > sModelprice[x]:
+		if cust_budget >= sModelprice[x]:
+			budget_found()
+		
+		else:
+			print "Well, we have others"
+		x -= 1
+			
+
+
+
+
+def spend_budget():
+	budget_big()
+
+
+
+
+
+#   TESTING
+#	Trying to call each specific element in sModelprice list to compare to cust_budget
+#   Below would use var from len of sModelprice to call specific element in list
+print "TESTING"
+print "sModelprice[0] :"
+print sModelprice[0]
+print "len(sModelprice) :"
+print len(sModelprice)
+
+x = len(sModelprice)
+print "print x (s/b same as above):"
+print x
+print "print x = x - 2"
+x = x - 2
+print x
+print "print sModelprice[x]:"
+print sModelprice[x]
+print ""
+print ""
+print "END OF TESTING"
+
+#	END TESTING
+
+
+
+def budget_found():
+	print "Ok - we have several styles to fit your budget."
+#	print "\n your budget is %s" % cust_budget
+#	print "\n our top-priced bike you is %s" % sModelprice[x]
+
+
+
+
+
+
+																	error returned is:
+
+sModelprice[x]
+Traceback (most recent call last):
+  File "bike_sales_3.py", line 253, in <module>
+    print sModelprice[x]
+IndexError: list index out of range
+
+																		WHY?
+																		if sModelprice[0] returns 1st element in sModelprice,
+																			and x = len(sModelprice),
+																			returning 6,
+																			why doesn't sModelprice[x] work?
+																			TRIED: x = int(x), but returned same error
+print "LOOK HERE"
+print sModelprice[5]
+
+#  budget_big()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		> > >			Below are previous attempts at sorting price, retaining the sort, then returning bike names
 
 
 # THE PLAN - 07.03:
@@ -190,119 +347,6 @@ cust_budget = float(cust_budget)
 
 
 
-"""
-#  begins budget queries
-def spend_budget():
-	budget_big()
-"""
-
-
-
-
-#  calls 1st budget query (>= top price or < min)
-
-# if cust_budget is >= most expensive bike...	 if not, call 2nd budget query
-def budget_big():
-	if cust_budget >= max(sModelprice):
-		print "Well, we have every style to fit your budget!"
-#		print "\n your budget is %s" % cust_budget
-#		print "\n our top-priced bike is %s" % max(sModelprice)
-#		wants()
-
-# 2nd budget query: if cust_budget < lowest price
-	elif cust_budget < min(sModelprice):
-		print "I'm sorry, we don't have any bike models in your price range,",
-		print " but we have plenty of accessories you might be interested in."
-		
-	else:
-		budget_mid()
-		print "> > To mid-level priced bikes"
-		
-def budget_mid():
-	x = len(sModelprice)
-
-	while cust_budget > sModelprice[x]:
-		if cust_budget >= sModelprice[x]:
-			budget_found()
-		
-		else:
-			print "Well, we have others"
-		x -= 1
-			
-	
-
-
-#   TESTING
-#	Trying to call each specific element in sModelprice list to compare to cust_budget
-#   Below would use var from len of sModelprice to call specific element in list
-print "TESTING"
-print "sModelprice[0] :"
-print sModelprice[0]
-print "len(sModelprice) :"
-print len(sModelprice)
-
-x = len(sModelprice)
-print "print x (s/b same as above):"
-print x
-print "print x = x - 2"
-x = x - 2
-print x
-print "print sModelprice[x]:"
-print sModelprice[x]
-print ""
-print ""
-print "END OF TESTING"
-
-#	END TESTING
-
-
-
-
-def budget_found():
-	print "Ok - we have several styles to fit your budget."
-#	print "\n your budget is %s" % cust_budget
-#	print "\n our top-priced bike for you is %s" % sModelprice[x]
-
-
-
-
-
-
-"""																		error returned is:
-
-sModelprice[x]
-Traceback (most recent call last):
-  File "bike_sales_3.py", line 253, in <module>
-    print sModelprice[x]
-IndexError: list index out of range
-
-																		WHY?
-																		if sModelprice[0] returns 1st element in sModelprice,
-																			and x = len(sModelprice),
-																			returning 6,
-																			why doesn't sModelprice[x] work?
-																			TRIED: x = int(x), but returned same error
-"""		
-
-
-budget_big()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-"""		> > >			Below are previous attempts at sorting price, retaining the sort, then returning bike names
-
 # IMMEDIATELY BELOW: trying to look at each highest price and compare to cust_budget by calling 1 less than len of prices
 #		each "round"
 
@@ -322,9 +366,8 @@ def budget_mid():
 	low_price = x
 #	for (sModelprice):
 	low_price = int(min(sModelprice))
-#	for i in range(hi_price, low_price, -1):
+#	for i in range(low_price, hi_price,  -1):
 #		print i
-
 
 
 
@@ -388,6 +431,9 @@ modelPrice.append(model_nPrice("WBreeze", "600.00"))
 
 
 
+
+
+
 sort_list = []
 for class_object in modelPrice:
 	print class_object.model + ": $" + class_object.price
@@ -400,7 +446,6 @@ for rec in sort_list:
 	print class_object.model + ": $" + class_object.price
 	
 
-
 #	Attempts at sorting dictionaries - FAIL
 testing = {
 	"one": "one-1",
@@ -412,10 +457,10 @@ testing = {
 values = testing.values()
 STesting = sorted(values)
 keys = testing.keys()
-sKeys = keys[STesting]
+#  sKeys = keys[STesting]
 
 print "These are the keys to the sorted values:"
-print sKeys
+# print sKeys
 
 
 
@@ -426,7 +471,6 @@ print "\nThis is the dictionary sorted() - which sorts by keys (presum. by defau
 print sorted(testing)
 print "\nThis is the dictionary sorted(testing.value):"
 print sorted(testing.values())
-
 
 
 print "This is model_nPrice mod"
@@ -441,9 +485,20 @@ print "This is sorted model_nPrice mod"
 print model_nPrice
 
 
+"""
 
 
 
+
+
+
+
+
+
+
+
+
+#     WELCOME MESSAGE
 store = "Wheely Good"
 
 def welcome():
@@ -461,6 +516,25 @@ def welcome():
 	print ""
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+"""
 #  TESTING
 # print cost to produce each bike
 print "Original order of bike costs:\n",
@@ -472,6 +546,9 @@ print ""
 print "Original order of bike prices (including markup: cost + 20%):\n",
 print model_price
 print ""
+
+
+
 
 
 print "Print model_price[3]"
@@ -486,16 +563,7 @@ print ""
 
 
 
-# dictionary of name/price to: SORT by price, then return corresponding models
 
-name_price = {
-	WTough.model: WTough.price,
-	WHigh.model: WHigh.price,
-	WSleek.model: WSleek.price,
-	WDay.model: WDay.price,
-	WGust.model: WGust.price,
-	WBreeze.model: WBreeze.price
-}
 
 
 #  INFO ON SORTING DICIONARY
@@ -519,11 +587,18 @@ print ""
 print ""
 print "what happens if I store in a var? will order be stored?!"
 SName_price = sorted(name_price.values())
-print list(SName_price)
+NameList = name_price
+
+NewName = sorted(name_price)
+print "NwName"
+print NewName
+
+
+
+print sorted(SName_price)
 print SName_price
 print ""
 print ""
-
 
 
 
@@ -652,7 +727,7 @@ print price_ascend[:(number_of_bikes - 1)]
 countdown = price_ascend[:(number_of_bikes - 1)]
 
 
-==== > Right now stuck in endless loop of "else" statement
+#  ==== > Right now stuck in endless loop of "else" statement
 
 # if cust_budget is between cost of top bike and next lower-priced bike:
 #     --->  change to last-called bike price
@@ -670,6 +745,16 @@ def budget_queries():
 			print "We have a top-notch children's model"
  
 
+
+
+
+
+
+
+
+
+
+#    MODEL BIKE QUERIES (FOR TOP-PRICED BUDGET ONLY)
  ======== >			SAVE for completed price query def
 #		Ask what type of bike - to figure out model
 
