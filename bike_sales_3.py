@@ -163,6 +163,34 @@ model_price = [WTough.price, WHigh.price, WSleek.price, WDay.price, WGust.price,
 
 
 
+# 		= = = = = = = = = = = = = = = = = = = = = = = = = = =		SECTION 03
+# 		= = = = = = = = = = = = = = = = = = = = = = = = = = =			welcome message; 
+
+
+
+#     WELCOME MESSAGE
+store = "Wheely Good"
+
+def welcome():
+	print ""
+	print ""
+	print "Welcome to %s!" % store
+	print ""
+
+	print "We have many bicycles - whatever you're looking for"
+	print ""
+	print "Our models are:"
+	print "the",
+	print model_names
+	print ""
+	print ""
+
+
+
+
+
+
+
 
 
 # 		= = = = = = = = = = = = = = = = = = = = = = = = = = =		SECTION 03
@@ -170,7 +198,7 @@ model_price = [WTough.price, WHigh.price, WSleek.price, WDay.price, WGust.price,
 
 
 
-# dictionary of name/price to: SORT by price, then return corresponding models
+# dictionary of name/price to: SORT by price, then return corresponding model names
 
 
 import operator
@@ -183,17 +211,125 @@ name_price = {
 	WBreeze.model: WBreeze.price
 }
 sorted_name_price = sorted(name_price.items(), key = operator.itemgetter(1))
+# 	bikes_ascend = list of (name, price)
+bikes_ascend = sorted_name_price
 
+
+
+
+# 		= = = = = = = = = = = = = = = = = = = = = = = = = = =		SECTION 04
+# 		= = = = = = = = = = = = = = = = = = = = = = = = = = =			comparing customer's budget with bike prices 
+
+#cust_budget = raw_input("So, how much did you want to spend?\n")
+#cust_budget = float(cust_budget)
+
+def dialog_1():
+	print "Well, we have every style to fit your budget!"
+	print "\n your budget is %s" % cust_budget
+	print "\n our top-priced bike is %s" % max(model_price)
+
+def dialog_2():
+	print "Ok, we have several styles to fit your budget."
+	print "\nYour budget is %s" % cust_budget
+
+def dialog_3():
+	print "We have some really nice kids' bikes over here."
+	print "\nYour budget is %s" % cust_budget
+
+
+def dialog_4():
+	print "I'm sorry, we don't have any bike models in your price range,",
+	print " but we have plenty of accessories you might be interested in."
+
+
+
+
+
+cust_budget = raw_input("Your budget here\n")
+cust_budget = float(cust_budget)
+
+# prices_ascend = prices only
+prices_ascend = tuple(sorted(model_price))
+
+
+
+def budget():
+	x = (len(bikes_ascend) - 1)
+
+# make FOR statement so that FOR each price, compare cust_budget, IF >=, then DIALOG_2(), ELSE, DIALOG_4()
+#		for cust_budget in prices_ascend:
+	
+		if cust_budget >= prices_ascend[x]:
+			dialog_1()
+
+		elif cust_budget < prices_ascend[x]:
+			while x < 6:			#  OH NO! COFFEE HAUS CLOSING & TRAIN OF THOUGHT GONE!
+#										can i actually do a WHILE statement inside an IF?
+
+
+		else:
+			dialog_4()
+
+		dialog_2()
+
+
+
+#  here is where the welcome() will be called when other sections are ready
+budget()
+
+
+
+
+
+
+
+
+
+
+
+"""
+
+#   ORIGINAL IF statement for cust_budget > max bike price:
+			if cust_budget > max(prices_ascend):
+				dialog_1()
+				x += 1
+				
+				
+#   TESTING
+#		testing x
+
+x = (len(bikes_ascend) - 2)
+print x
+print prices_ascend[x]
+
+
+
+
+#   TESTING
+#		testing the sorted_name_price list
 
 print "sorted_name_price"
 print sorted_name_price
-print "print first item in sorted list"
+print "\nprint first item in sorted list"
 print sorted_name_price
 
 
+print "\nprint length of sorted_name_price list"
 print len(sorted_name_price)
 
-print name_price
+v = 20
+print "\nIs v (20) > Windy Gust (the lowest price bike)?"
+print v > sorted_name_price[0]
+print v < sorted_name_price[3]
+print sorted_name_price[3]
+
+
+
+
+
+
+
+
 
 for i in name_price(value):
 	print i
@@ -204,8 +340,6 @@ for i in name_price(value):
 
 
 
-
-"""
 
 #  calls 1st budget query (>= top price or < min)
 
@@ -338,9 +472,6 @@ sModelprice = sorted(model_price)
 print "Sorted Model Prices"
 print sModelprice
 
-
-cust_budget = raw_input("So, how much did you want to spend?\n")
-cust_budget = float(cust_budget)
 
 
 
@@ -496,24 +627,6 @@ print model_nPrice
 
 
 
-
-
-#     WELCOME MESSAGE
-store = "Wheely Good"
-
-def welcome():
-	print ""
-	print ""
-	print "Welcome to %s!" % store
-	print ""
-
-	print "We have many bicycles - whatever you're looking for"
-	print ""
-	print "Our models are:"
-	print "the",
-	print model_names
-	print ""
-	print ""
 
 
 
