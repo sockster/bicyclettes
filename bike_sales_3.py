@@ -223,24 +223,72 @@ bikes_ascend = sorted_name_price
 
 
 
-# currently returning all models for # models available
 #	WANT: return only models < cust_budget
+#		WORKS w/integers
+cust_price = 0
+cust_price = 5
+bikes_ascend = [1, 3, 4, 5, 7, 8, 9]
 
 out = []
-for cust_price in bikes_ascend:
-	if cust_price > bikes_ascend:
-		out.append(bikes_ascend)
-		
+x = 0
 
-cust_budget = raw_input("So, how much did you want to spend?\n")
-cust_budget = float(cust_budget)
-print "Print out (list)"
+print "Print out (list) - s/b empty"
+print out
+print "\n Print cust_price"
+print cust_price
+print "\nPrint bikes_ascend"
+print bikes_ascend
+
+
+
+while cust_price > bikes_ascend[x]:
+	if cust_price > bikes_ascend[x]:
+		out.append(bikes_ascend[x])
+		print (out)
+		x += 1
+	else:
+		print bikes_ascend[x]
+
+
+print "Print out (list) - s/n/b empty"
 print out
 
+print "\nPrint cust_price - s/b 5"
+print cust_price
+print "\nPrint bikes_ascend - s/b 1-9"
+print bikes_ascend
+
+print "\nPrint out (list) - s/b 1, 3, 4"
+print out
+
+print "\nManual compare of numbers - bikes_ascend[0] : " + str(bikes_ascend[0])
+print cust_price > bikes_ascend[0]
+
+print "\nManual compare of numbers - bikes_ascend[1] : " + str(bikes_ascend[1])
+print cust_price > bikes_ascend[1]
+print "\nManual compare of numbers - bikes_ascend[2] : " + str(bikes_ascend[2])
+print cust_price > bikes_ascend[2]
+
+print "\nManual compare of numbers - bikes_ascend[3] : " + str(bikes_ascend[3])
+print cust_price > bikes_ascend[3]
+print "\nManual compare of numbers - bikes_ascend[4] : " + str(bikes_ascend[4])
+print cust_price > bikes_ascend[4]
+print "\nManual compare of numbers - bikes_ascend[5] : " + str(bikes_ascend[5])
+print cust_price > bikes_ascend[5]
+print bikes_ascend[5]
+print cust_price
 
 
 
 
+"""
+for cust_price in bikes_ascend:
+	if cust_price > bikes_ascend[::1]:
+		out.append(bikes_ascend)
+"""		
+
+# cust_budget = raw_input("So, how much did you want to spend?\n")
+# cust_budget = float(cust_budget)
 
 
 
