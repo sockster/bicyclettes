@@ -217,8 +217,41 @@ bikes_ascend = sorted_name_price
 
 
 
+
 # 		= = = = = = = = = = = = = = = = = = = = = = = = = = =		SECTION 04
 # 		= = = = = = = = = = = = = = = = = = = = = = = = = = =			comparing customer's budget with bike prices 
+
+
+
+# currently returning all models for # models available
+#	WANT: return only models < cust_budget
+
+out = []
+for cust_price in bikes_ascend:
+	if cust_price > bikes_ascend:
+		out.append(bikes_ascend)
+		
+
+cust_budget = raw_input("So, how much did you want to spend?\n")
+cust_budget = float(cust_budget)
+print "Print out (list)"
+print out
+
+
+
+
+
+
+
+
+
+
+
+
+"""
+#	lo-tech:
+# 	if cust_budget is > than max; or < min; else, start price_queries() to determine what is in cust's price range
+
 
 #cust_budget = raw_input("So, how much did you want to spend?\n")
 #cust_budget = float(cust_budget)
@@ -247,9 +280,19 @@ def dialog_4():
 
 cust_budget = raw_input("Your budget here\n")
 cust_budget = float(cust_budget)
+# price_ascend = prices only
+price_ascend = model_price
 
-# prices_ascend = prices only
-prices_ascend = tuple(sorted(model_price))
+
+
+
+bike_prices = range(int(min(price_ascend)), int(max(price_ascend)))
+
+
+
+
+
+
 
 
 
@@ -259,20 +302,22 @@ def budget():
 # make FOR statement so that FOR each price, compare cust_budget, IF >=, then DIALOG_2(), ELSE, DIALOG_4()
 #		for cust_budget in prices_ascend:
 	
-		if cust_budget >= prices_ascend[x]:
-			dialog_1()
+	if cust_budget >= bike_prices:
+		dialog_1()
+		
+	elif cust_budget <= bike_prices:
+		dialog_4()
 
-		elif cust_budget < prices_ascend[x]:
-			while x < 6:			#  OH NO! COFFEE HAUS CLOSING & TRAIN OF THOUGHT GONE!
-#										can i actually do a WHILE statement inside an IF?
-
-
-		else:
-			dialog_4()
-
-		dialog_2()
+	else:
+#	 cust_budget will be within bike price range:
+		price_queries()
 
 
+
+
+
+def price_queries():
+	print "Hello Bike World"
 
 #  here is where the welcome() will be called when other sections are ready
 budget()
@@ -287,13 +332,14 @@ budget()
 
 
 
-"""
-
 #   ORIGINAL IF statement for cust_budget > max bike price:
 			if cust_budget > max(prices_ascend):
 				dialog_1()
 				x += 1
 				
+
+
+
 				
 #   TESTING
 #		testing x
