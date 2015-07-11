@@ -225,58 +225,57 @@ bikes_ascend = sorted_name_price
 
 #	WANT: return only models < cust_budget
 #		WORKS w/integers
-cust_price = 0
-cust_price = 5
-bikes_ascend = [1, 3, 4, 5, 7, 8, 9]
+# w/o a net:
+# cust_price = 0
+# cust_price = 5
+# bikes_ascend = [1, 3, 4, 5, 7, 8, 9]
+
+cust_budget = raw_input("So, how much did you want to spend?\n")
+cust_budget = float(cust_budget)
+
+
 
 out = []
 x = 0
 
 print "Print out (list) - s/b empty"
 print out
-print "\n Print cust_price"
-print cust_price
-print "\nPrint bikes_ascend"
-print bikes_ascend
+print "\n Print cust_budget"
+print cust_budget
+print "\nPrint sorted(model_price)"
+print sorted(model_price)
+Smodel_price = sorted(model_price)
+print "\nPrint Smodel_price"
+print Smodel_price
 
 
-
-while cust_price > bikes_ascend[x]:
-	if cust_price > bikes_ascend[x]:
-		out.append(bikes_ascend[x])
-		print (out)
+while cust_budget > Smodel_price[x] and x < 5:
+	if cust_budget > Smodel_price[x]:
+		out.append(Smodel_price[x])
+		print out
 		x += 1
 	else:
-		print bikes_ascend[x]
+		print Smodel_price[x]
 
 
 print "Print out (list) - s/n/b empty"
 print out
 
-print "\nPrint cust_price - s/b 5"
-print cust_price
-print "\nPrint bikes_ascend - s/b 1-9"
-print bikes_ascend
+print "\nPrint cust_price - s/b input #"
+print cust_budget
+print "\nPrint bikes_ascend - s/b all"
+print Smodel_price
 
-print "\nPrint out (list) - s/b 1, 3, 4"
+print "\nPrint out (list) - s/b all $s < cust_budget"
 print out
 
-print "\nManual compare of numbers - bikes_ascend[0] : " + str(bikes_ascend[0])
-print cust_price > bikes_ascend[0]
 
-print "\nManual compare of numbers - bikes_ascend[1] : " + str(bikes_ascend[1])
-print cust_price > bikes_ascend[1]
-print "\nManual compare of numbers - bikes_ascend[2] : " + str(bikes_ascend[2])
-print cust_price > bikes_ascend[2]
 
-print "\nManual compare of numbers - bikes_ascend[3] : " + str(bikes_ascend[3])
-print cust_price > bikes_ascend[3]
-print "\nManual compare of numbers - bikes_ascend[4] : " + str(bikes_ascend[4])
-print cust_price > bikes_ascend[4]
-print "\nManual compare of numbers - bikes_ascend[5] : " + str(bikes_ascend[5])
-print cust_price > bikes_ascend[5]
-print bikes_ascend[5]
-print cust_price
+
+
+
+
+
 
 
 
@@ -287,8 +286,6 @@ for cust_price in bikes_ascend:
 		out.append(bikes_ascend)
 """		
 
-# cust_budget = raw_input("So, how much did you want to spend?\n")
-# cust_budget = float(cust_budget)
 
 
 
