@@ -162,7 +162,6 @@ model_price = [WTough.price, WHigh.price, WSleek.price, WDay.price, WGust.price,
 
 
 
-
 # 		= = = = = = = = = = = = = = = = = = = = = = = = = = =		SECTION 03
 # 		= = = = = = = = = = = = = = = = = = = = = = = = = = =			welcome message; 
 
@@ -224,7 +223,6 @@ price_ascend = sorted_name_price
 
 
 #			REPLIES
-
 #	replies for lo-tech solution:
 
 def dialog_1():
@@ -239,7 +237,6 @@ def dialog_2():
 def dialog_3():
 	print "We have some really nice kids' bikes over here."
 	print "\nYour budget is %s" % cust_budget
-
 
 def dialog_4():
 	print "I'm sorry, we don't have any bike models in your price range,",
@@ -260,19 +257,24 @@ x = 0
 Smodel_price = sorted(model_price)
 
 
-#  NOTE: "else" not really working - not calling "dialog_4()"
-while cust_budget > Smodel_price[x] and x < 5:
-	if cust_budget > Smodel_price[x]:
+if cust_budget > Smodel_price[x] and x < 5:
+	while cust_budget > Smodel_price[x]:
 		out.append(Smodel_price[x])
 		print out	#  FOR TESTING PURPOSES ONLY
 		x += 1
-	else:
-		dialog_4()
+else:
+	dialog_4()
 
 
 
 
 
+
+print "Print Smodel_price"
+print Smodel_price
+print "Print x"
+print x
+print price_ascend[0:x]
 
 
 
